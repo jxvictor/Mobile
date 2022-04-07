@@ -1,0 +1,24 @@
+<ion-content color="primary" padding>
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Login</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input formControlName="cpf" name="cpf" type="cpf" placeholder="CPF" [(ngModel)]="usuario.cpf" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="senha" name="senha" type="password" placeholder="SENHA" [(ngModel)]="usuario.senha" required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

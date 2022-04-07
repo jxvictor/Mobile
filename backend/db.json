@@ -1,0 +1,24 @@
+{
+  "usuario": [
+    {
+      "id": 1,
+      "nome": "chico de pepe",
+      "cpf": "123",
+      "foto": "edt",
+      "dataNascimento": "11/10/2016",
+      "endereco": "Rua pedin barbosa",
+      "senha": "123"
+    }
+  ],
+  "game": [
+    {
+      "id": 1,
+      "nome": "Watch Dogs",
+      "foto": "edit",
+      "preco": 25.88,
+      "estudio": "Ubisoft",
+      "descricao": "Lorem Ipsun",
+      "anoLancamento": "11/10/2016"
+    }
+  ]
+}
