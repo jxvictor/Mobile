@@ -1,0 +1,89 @@
+<ion-content [scrollEvents]="true">
+    <div class="botoes-iniciais">
+      <div class="botao-home">
+        <ion-icon name="home-outline" (click)="voltarParaOMenu()"></ion-icon>
+      </div>
+      <div class="botao-adicionar">
+        <ion-icon name="add-circle-outline" (click)="abrirModalCadastro()"></ion-icon>
+      </div>
+    </div>
+
+    <ion-card *ngFor="let game of games">
+      <ion-card-header>
+        <ion-card-title>{{game.nome}}</ion-card-title>
+        <ion-avatar class="avatar">
+          <img src="{{game.foto}}" alt="Imagem Jogo">
+        </ion-avatar>
+      </ion-card-header>
+
+
+      <ion-card-content>
+        Preço: {{game.preco}}
+      </ion-card-content>
+      <ion-card-content>
+        Estúdio: {{game.estudio}}
+      </ion-card-content>
+      <ion-card-content>
+        Descrição: {{game.descricao}}
+      </ion-card-content>
+      <ion-card-content>
+        Ano de Lançamento: {{game.anoLancamento}}
+      </ion-card-content>
+
+      <ion-card-content>
+        <div class="botoes-iniciais">
+          <div class="botao-edit">
+            <ion-icon name="pencil-outline" (click)="abrirModalCadastro(game)"></ion-icon>
+          </div>
+          <div class="botao-excluir">
+            <ion-icon name="trash-outline" (click)="alertaConfirmacao(game.id)"></ion-icon>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-content class="titulo-form">
+      <div class="texto-titulo">
+        <h3>
+          NOVO JOGO
+        </h3>
+      </div>
+    </ion-content>
+    
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <ion-grid class="grid">
+        <ion-row justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div padding>
+              <ion-item>
+                <ion-input formControlName="nome" name="nome" type="text" placeholder="Nome"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input formControlName="foto" name="foto" type="text" placeholder="Funcionalidade em desenvolvimento..."></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input formControlName="preco" name="preco" type="transaction-currency" placeholder="Preço"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input formControlName="estudio" name="estudio" type="text" placeholder="Estúdio"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input formControlName="descricao" name="descricao" type="text" placeholder="Descrição"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input formControlName="anoLancamento" name="anoLancamento" type="text" placeholder="Ano de Lançamento"></ion-input>
+              </ion-item>
+            </div>
+            <div padding>
+              <ion-button size="large" expand="block" (click)="fecharModal()">Cancelar</ion-button>
+              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Salvar</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ng-template>
+</ion-modal>

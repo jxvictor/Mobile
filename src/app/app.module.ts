@@ -7,10 +7,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
+import { GamesComponent } from './games/games.component';
 import { TelaLoginComponent } from './tela-login/tela-login.component';
 
 @NgModule({
-  declarations: [AppComponent, TelaLoginComponent],
+  declarations: [AppComponent, TelaLoginComponent, DadosPessoaisComponent, GamesComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

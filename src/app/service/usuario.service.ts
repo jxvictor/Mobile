@@ -34,7 +34,11 @@ export class UsuarioService {
     return this.http.delete(this.endpoint + '/' + id);
   }
 
-  getUsuario(): Observable<Usuario[]> {
+  getUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.endpoint);
+  }
+
+  getUsuarioById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(this.endpoint + '/' + id);
   }
 }

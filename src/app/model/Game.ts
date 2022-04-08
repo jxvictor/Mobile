@@ -5,17 +5,17 @@ export class Game{
   preco: number;
   estudio: string;
   descricao: string;
-  anoLancamento: Date;
+  anoLancamento: string;
 
 
   constructor(
-    id: number,
-    nome: string,
-    foto: string,
-    preco: number,
-    estudio: string,
-    descricao: string,
-    anoLancamento: Date
+    id?: number,
+    nome?: string,
+    foto?: string,
+    preco?: number,
+    estudio?: string,
+    descricao?: string,
+    anoLancamento?: string
 ) {
     this.id = id;
     this.nome = nome;

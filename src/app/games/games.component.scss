@@ -1,0 +1,101 @@
+.games {
+    height: 100%;
+    background-color: #3880ff;
+}
+
+ion-content {
+    --background: #3880ff;
+}
+
+ion-card {
+    --background: #062f77;
+}
+
+
+ion-card-header {
+    margin-bottom: 5%;
+}
+
+ion-card-title {
+    text-align: center;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+ion-card-content {
+    color: #FFFFFF;
+}
+
+.avatar {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
+}
+
+ion-icon {
+    background-color: #062f77;
+    border-radius: 5px;
+    font-size: 2rem;
+}
+
+.botoes-iniciais {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.botao {
+    display: grid;
+    align-items: center;
+    margin-top: 20%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.botao-voltar {
+    --background: #062f77;
+}
+
+.botao-adicionar {
+    margin-left: 10%;
+}
+
+.botao-home {
+    margin-right: 10%;
+}
+
+.botao-edit {
+    margin-right: 10%;
+    --background: #3880ff;
+}
+
+.botao-excluir {
+    margin-left: 10%;
+    --background: #3880ff;
+}
+
+.grid {
+    background-color: #062f77;
+}
+
+.titulo-form{
+    display: flex;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.texto-titulo {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+ion-item {
+    --background: #062f77;
+  }
