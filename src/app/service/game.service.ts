@@ -1,5 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireList, AngularFireObject, AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable } from 'rxjs';
 import { Game } from '../model/Game';
 
 @Injectable({
