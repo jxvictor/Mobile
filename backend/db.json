@@ -2,11 +2,11 @@
   "usuario": [
     {
       "id": 1,
-      "nome": "chico de pepe",
+      "nome": "João Victor",
       "cpf": "123",
-      "foto": "edt",
-      "dataNascimento": "11/10/2016",
-      "endereco": "Rua pedin barbosa",
+      "foto": "./assets/joaovitu.jpeg",
+      "dataNascimento": "11/13/2000",
+      "endereco": "Rua Beatles",
       "senha": "123"
     }
   ],
@@ -14,11 +14,20 @@
     {
       "id": 1,
       "nome": "Watch Dogs",
-      "foto": "edit",
-      "preco": 25.88,
+      "foto": "./assets/watchDogs.webp",
+      "preco": "350",
       "estudio": "Ubisoft",
-      "descricao": "Lorem Ipsun",
-      "anoLancamento": "11/10/2016"
+      "descricao": "Lorem Ipsun Lorem Ipsun Lorem Ipsun",
+      "anoLancamento": "2014"
+    },
+    {
+      "id": 2,
+      "nome": "asdasdasd",
+      "foto": "./assets/manutencao.jpeg",
+      "preco": "123",
+      "estudio": "asdasd",
+      "descricao": "asdasd",
+      "anoLancamento": "asdasd"
     }
   ]
 }

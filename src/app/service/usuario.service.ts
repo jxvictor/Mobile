@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Usuario } from '../model/Usuario';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  endpoint = 'http://localhost:3000/usuario';
+  userList: AngularFireList<any>;
+  userRef: AngularFireObject<any>;
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    private db: AngularFireDatabase
+  ) { }
 
-  addUsuario(u: Usuario): Observable<any> {
-    const httpOptions = {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-
-    return this.http.post(this.endpoint, JSON.stringify(u), httpOptions);
+  addUsuario(u: Usuario){
+    this.userList = this.db.list('/usuario');
+    return this.userList.push(u);
   }
 
-  updateUsuario(u: Usuario): Observable<any> {
-    const httpOptions = {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-
-    return this.http.put(this.endpoint + '/' + u.id, JSON.stringify(u), httpOptions);
+  updateUsuario(id, u: Usuario) {
+    return this.userRef.update(u);
   }
 
-  deleteUsuario(id: number): Observable<any> {
-    return this.http.delete(this.endpoint + '/' + id);
+  deleteUsuario(id: number) {
+    this.userRef = this.db.object('/usuario/' + id);
+    this.userRef.remove();
   }
 
-  getUsuario(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.endpoint);
+  getUsuarios() {
+    this.userList = this.db.list('/usuario');
+    return this.userList;
+  }
+
+  getUsuarioById(id: number){
+    this.userRef = this.db.object('/usuario/' + id);
+    return this.userRef;
   }
 }

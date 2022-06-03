@@ -1,6 +1,9 @@
 import { UsuarioService } from './../service/usuario.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Usuario } from '../model/Usuario';
+import { MenuController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DadosPessoaisComponent } from '../dados-pessoais/dados-pessoais.component';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +14,14 @@ export class HomePage {
   serv: UsuarioService;
   usuario = new Array<Usuario>();
 
-  constructor(usuarioService: UsuarioService) {
+  constructor(
+    private usuarioService: UsuarioService,
+    private menu: MenuController,
+    private router: Router,
+    private route: ActivatedRoute
+    ) {
     this.serv = usuarioService;
-    usuarioService.getUsuario().subscribe(response => (this.usuario = response));
+    usuarioService.getUsuarios().subscribe(response => (this.usuario = response));
   }
 
   onClickSalvar(){
@@ -22,7 +30,7 @@ export class HomePage {
 
     this.serv.addUsuario(u).subscribe(response=>{
       u=response;
-      this.serv.getUsuario().subscribe(resp => (this.usuario = resp));
+      this.serv.getUsuarios().subscribe(resp => (this.usuario = resp));
     });
   }
 
@@ -36,13 +44,35 @@ export class HomePage {
     });
   }*/
 
+  openMenu() {
+    this.menu.enable(true, 'custom');
+    this.menu.open('custom');
+  }
+
   onClickDelete(){
     const id = this.usuario.length;
 
     this.serv.deleteUsuario(id).subscribe(response=>{
       //u = response;
-      this.serv.getUsuario().subscribe(resp => (this.usuario = resp));
+      this.serv.getUsuarios().subscribe(resp => (this.usuario = resp));
     });
   }
 
+  chamarDadosPessoais(): void {
+    let id;
+    this.route.params.subscribe(params => {
+      id = params['id'];
+    });
+
+    this.router.navigateByUrl('dados-pessoais/' + id);
+  }
+
+  chamarGames(): void {
+    let id;
+    this.route.params.subscribe(params => {
+      id = params['id'];
+    });
+
+    this.router.navigateByUrl('games/' + id);
+  }
 }

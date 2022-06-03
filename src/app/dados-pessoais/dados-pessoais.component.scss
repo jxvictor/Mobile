@@ -1,0 +1,42 @@
+.dados-pessoais {
+    height: 100%;
+    background-color: #3880ff;
+}
+
+ion-card {
+    --background: #062f77;
+}
+
+
+ion-card-header {
+    margin-bottom: 5%;
+}
+
+ion-card-title {
+    text-align: center;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+ion-card-content {
+    color: #FFFFFF;
+}
+
+.avatar {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
+}
+
+.botao {
+    display: grid;
+    align-items: center;
+    margin-top: 20%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.botao-voltar {
+    --background: #062f77;
+}

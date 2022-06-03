@@ -1,0 +1,26 @@
+
+<div class="dados-pessoais">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{usuario.nome}}</ion-card-title>
+      <ion-avatar class="avatar">
+        <img src="./assets/joaovitu.jpeg" alt="Imagem Usuário">
+      </ion-avatar>
+    </ion-card-header>
+  
+    <ion-card-content>
+      CPF: {{usuario.cpf}}
+    </ion-card-content>
+    <ion-card-content>
+      Idade: {{usuario.idade}}
+    </ion-card-content>
+    <ion-card-content>
+      Endereço: {{usuario.endereco}}
+    </ion-card-content>
+  
+  </ion-card>
+  
+  <div class="botao">
+    <ion-button (click)="voltarParaOMenu()" class="botao-voltar">Voltar para o Menu Principal</ion-button>
+  </div>
+</div>

@@ -6,6 +6,7 @@ export class Usuario{
   dataNascimento: Date;
   endereco: string;
   senha: string;
+  idade: number;
 
   constructor(
     id?: number,
@@ -14,7 +15,8 @@ export class Usuario{
     foto?: string,
     dataNascimento?: Date,
     endereco?: string,
-    senha?: string
+    senha?: string,
+    idade?: number
 ) {
     this.id = id;
     this.nome = nome;
@@ -23,5 +25,6 @@ export class Usuario{
     this.dataNascimento = dataNascimento;
     this.endereco = endereco;
     this.senha = senha;
+    this.idade = idade;
   }
 }
