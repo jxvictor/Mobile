@@ -11,7 +11,6 @@ import { DadosPessoaisComponent } from '../dados-pessoais/dados-pessoais.compone
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  serv: UsuarioService;
   usuario = new Array<Usuario>();
 
   constructor(
@@ -20,29 +19,22 @@ export class HomePage {
     private router: Router,
     private route: ActivatedRoute
     ) {
-    this.serv = usuarioService;
-    usuarioService.getUsuarios().subscribe(response => (this.usuario = response));
+    let usuarioList = this.usuarioService.getUsuarios();
+    usuarioList.snapshotChanges().subscribe(res=> {
+      this.usuario = [];
+      res.forEach(usuarios=> {
+        let a = usuarios.payload.toJSON();
+        a['$key'] = usuarios.key;
+        this.usuario.push(a as Usuario);
+      })})
+      this.usuario.reverse().pop();
   }
 
   onClickSalvar(){
     const proximoId = this.usuario.length+1;
-    let u = new Usuario(proximoId, 'Usuario', '12341','localfoto',new Date(10/11/2000),'rua ba','1850');
-
-    this.serv.addUsuario(u).subscribe(response=>{
-      u=response;
-      this.serv.getUsuarios().subscribe(resp => (this.usuario = resp));
-    });
+    let u = new Usuario(proximoId, null, 'Usuario', '12341','localfoto', new Date(10/11/2000),'rua ba','1850');
+    this.usuarioService.addUsuario(u);
   }
-
- /* onClickUpdate(){
-    const proximoId = this.usuario.length+1;
-    let u = new Usuario(proximoId, 'Usuario', '12341','localfoto',new Date(10/11/2000),'rua ba','1850');
-
-    this.serv.addUsuario(u).subscribe(response=>{
-      u=response;
-      this.serv.getUsuario().subscribe(resp => (this.usuario = resp));
-    });
-  }*/
 
   openMenu() {
     this.menu.enable(true, 'custom');
@@ -51,11 +43,7 @@ export class HomePage {
 
   onClickDelete(){
     const id = this.usuario.length;
-
-    this.serv.deleteUsuario(id).subscribe(response=>{
-      //u = response;
-      this.serv.getUsuarios().subscribe(resp => (this.usuario = resp));
-    });
+    this.usuarioService.deleteUsuario(id.toString());
   }
 
   chamarDadosPessoais(): void {

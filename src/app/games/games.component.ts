@@ -33,7 +33,8 @@ export class GamesComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.fb.group({
-      id: [null],
+
+      $key: [null],
       nome: [null, Validators.required],
       foto: [{value:null, disabled: true}],
       preco: [null, Validators.required],
@@ -44,9 +45,15 @@ export class GamesComponent implements OnInit {
   }
 
   listarJogos() {
-    this.gameService.getGames().subscribe(res => {
-      this.games = res;
-    })
+    let gameList = this.gameService.getGames();
+    gameList.snapshotChanges().subscribe(res=> {
+      this.games = [];
+      res.forEach(games=> {
+        let a = games.payload.toJSON();
+        a['$key'] = games.key;
+        this.games.push(a as Game);
+      })})
+      this.games.reverse().pop();
   }
 
   voltarParaOMenu() {
@@ -75,7 +82,7 @@ export class GamesComponent implements OnInit {
       {
         text: 'Sim',
         handler: () => {
-          this.excluirGame(id);
+          this.excluirGame(id.toString());
         }
       }
       ]
@@ -89,23 +96,21 @@ export class GamesComponent implements OnInit {
     this.isOpen = true;
   }
 
-  excluirGame(id: number) {
-    this.gameService.deleteGame(id).subscribe( () => {
-      this.listarJogos();
-    })
+  excluirGame(id: string) {
+    this.gameService.deleteGame(id);
   }
 
   salvar() {
     this.jogo = this.form.getRawValue();
 
     if (this.jogo?.id) {
-      this.gameService.updateGame(this.jogo).subscribe(() => {
+      this.gameService.updateGame(this.jogo.$key, this.jogo).then(() => {
         this.listarJogos();
       })
     }
     else {
       this.jogo.foto = './assets/manutencao.jpeg';
-      this.gameService.addGames(this.jogo).subscribe(() => {
+      this.gameService.addGame(this.jogo).then(() => {
         this.listarJogos();
       })
     }

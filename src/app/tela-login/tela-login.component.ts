@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { AngularFireList } from '@angular/fire/compat/database';
 import { Component, OnInit } from '@angular/core';
@@ -7,6 +8,7 @@ import { AlertController } from '@ionic/angular';
 
 import { Usuario } from '../model/Usuario';
 import { UsuarioService } from '../service/usuario.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tela-login',
@@ -17,7 +19,7 @@ export class TelaLoginComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
   form: FormGroup;
-  usuarios = [];
+  usuarios: Usuario[] = [];
 
 
   constructor(
@@ -31,22 +33,21 @@ export class TelaLoginComponent implements OnInit {
   }
 
   login(){
-    const listaUsuarios = this.serv.getUsuarios();
-    listaUsuarios.snapshotChanges().subscribe((res) =>{
+    let usuarioList = this.serv.getUsuarioById(environment.idLogin.toString());
+    usuarioList.snapshotChanges().subscribe(res=> {
       this.usuarios = [];
-      res.forEach(item =>{
-        const a = item.payload.toJSON();
-        a['$key'] = item.key;
-        this.usuarios.push(a as Usuario);
-      });
-
+      let a = res.payload.toJSON() as Usuario;
+      //a['$key'] = res.key;
+      //this.usuarios.push(a as Usuario);
+      console.log(this.usuarios);
+      console.log(a as Usuario);
+      console.log(res.payload.toJSON());
       try {
-        const usuarioEncontrado = this.usuarios.filter((usuario)=> usuario.cpf === this.usuario.cpf)[0];
-        console.log(usuarioEncontrado);
+        console.log(a);
 
-        if(this.usuario.senha === usuarioEncontrado.senha){
-          console.log(usuarioEncontrado.id);
-          this.router.navigateByUrl('home/' + usuarioEncontrado.id);
+        if(this.usuario.senha === a.senha && a.cpf === this.usuario.cpf){
+          console.log(a.id);
+          this.router.navigateByUrl('home/' + a.id);
         } else {
           this.mostrarAlertaSenhaErrada();
           this.form.reset();
@@ -78,10 +79,9 @@ export class TelaLoginComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.fb.group({
+      $key: [null],
       cpf: [null],
       senha: [null],
     });
   }
-
-
 }

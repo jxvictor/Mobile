@@ -1,5 +1,9 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { Usuario } from '../model/Usuario';
 import { UsuarioService } from '../service/usuario.service';
 
@@ -21,8 +25,8 @@ export class DadosPessoaisComponent implements OnInit {
   ngOnInit() {
     let id = this.buscarIdUsuarioPelaRota();
 
-    this.usuarioService.getUsuarioById(id).subscribe(res => {
-      this.usuario = res;
+    this.usuarioService.getUsuarioById(environment.idLogin.toString()).snapshotChanges().subscribe(res => {
+      this.usuario = res.payload.toJSON() as Usuario;
       this.calcularIdade();
     });
   }

@@ -1,5 +1,6 @@
 export class Game{
   id: number;
+  $key: string;
   nome: string;
   foto: string;
   preco: number;
@@ -10,6 +11,7 @@ export class Game{
 
   constructor(
     id?: number,
+    $key?: string,
     nome?: string,
     foto?: string,
     preco?: number,
@@ -18,6 +20,7 @@ export class Game{
     anoLancamento?: string
 ) {
     this.id = id;
+    this.$key = $key;
     this.nome = nome;
     this.foto = foto;
     this.preco = preco;

@@ -1,40 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../model/Usuario';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  userList: AngularFireList<any>;
-  userRef: AngularFireObject<any>;
-
   constructor(
     private db: AngularFireDatabase
   ) { }
 
-  addUsuario(u: Usuario){
-    this.userList = this.db.list('/usuario');
-    return this.userList.push(u);
+  addUsuario(u: Usuario) {
+    const listUsuarios = this.db.list('/usuario');
+    return listUsuarios.push({
+      nome: u.nome,
+      cpf: u.cpf,
+      foto: u.foto,
+      dataNascimento: u.dataNascimento,
+      endereco: u.endereco,
+      senha: u.senha,
+      idade: u.idade
+    });
   }
 
-  updateUsuario(id, u: Usuario) {
-    return this.userRef.update(u);
+  updateUsuario(id: string, u: Usuario) {
+    const listUsuarios = this.db.object('/usuario' + id);
+    return listUsuarios.update({
+      nome: u.nome,
+      cpf: u.cpf,
+      foto: u.foto,
+      dataNascimento: u.dataNascimento,
+      endereco: u.endereco,
+      senha: u.senha,
+      idade: u.idade
+    });
   }
 
-  deleteUsuario(id: number) {
-    this.userRef = this.db.object('/usuario/' + id);
-    this.userRef.remove();
+  deleteUsuario(id: string) {
+    const listUsuarios = this.db.object('/usuario' + id);
+    listUsuarios.remove();
   }
 
   getUsuarios() {
-    this.userList = this.db.list('/usuario');
-    return this.userList;
+    return this.db.list('/usuario');
   }
 
-  getUsuarioById(id: number){
-    this.userRef = this.db.object('/usuario/' + id);
-    return this.userRef;
+  getUsuarioById(id: string) {
+    console.log(id);
+    return this.db.object('/usuario' + id);
   }
 }
