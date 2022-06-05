@@ -1,6 +1,7 @@
 export class Usuario{
   id: number;
   nome: string;
+  $key: string;
   cpf: string;
   foto: string;
   dataNascimento: Date;
@@ -10,6 +11,7 @@ export class Usuario{
 
   constructor(
     id?: number,
+    $key?: string,
     nome?: string,
     cpf?: string,
     foto?: string,
@@ -19,6 +21,7 @@ export class Usuario{
     idade?: number
 ) {
     this.id = id;
+    this.$key = $key;
     this.nome = nome;
     this.cpf = cpf;
     this.foto = foto;

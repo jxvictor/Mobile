@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 
 import { Usuario } from '../model/Usuario';
 import { UsuarioService } from '../service/usuario.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tela-login',
@@ -31,14 +32,12 @@ export class TelaLoginComponent implements OnInit {
   }
 
   login(){
-    const listaUsuarios = this.serv.getUsuarios();
-    listaUsuarios.snapshotChanges().subscribe((res) =>{
+    let usuarioList = this.serv.getUsuarioById(environment.idLogin.toString());
+    usuarioList.snapshotChanges().subscribe(res=> {
       this.usuarios = [];
-      res.forEach(item =>{
-        const a = item.payload.toJSON();
-        a['$key'] = item.key;
-        this.usuarios.push(a as Usuario);
-      });
+      let a = res.payload.toJSON();
+      this.usuarios.push(a);
+      console.log(this.usuarios);
 
       try {
         const usuarioEncontrado = this.usuarios.filter((usuario)=> usuario.cpf === this.usuario.cpf)[0];
@@ -78,10 +77,9 @@ export class TelaLoginComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.fb.group({
+      $key: [null],
       cpf: [null],
       senha: [null],
     });
   }
-
-
 }
