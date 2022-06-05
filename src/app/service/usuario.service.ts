@@ -49,6 +49,10 @@ export class UsuarioService {
 
   getUsuarioById(id: string) {
     console.log(id);
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 2854657d8524e2bbc8c4f844547243bba60145c6
     return this.db.object('/usuario' + id);
   }
 }

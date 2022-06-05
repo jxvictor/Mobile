@@ -36,12 +36,19 @@ export class TelaLoginComponent implements OnInit {
     let usuarioList = this.serv.getUsuarioById(environment.idLogin.toString());
     usuarioList.snapshotChanges().subscribe(res=> {
       this.usuarios = [];
+<<<<<<< HEAD
       let a = res.payload.toJSON() as Usuario;
       //a['$key'] = res.key;
       //this.usuarios.push(a as Usuario);
       console.log(this.usuarios);
       console.log(a as Usuario);
       console.log(res.payload.toJSON());
+=======
+      let a = res.payload.toJSON();
+      this.usuarios.push(a);
+      console.log(this.usuarios);
+
+>>>>>>> 2854657d8524e2bbc8c4f844547243bba60145c6
       try {
         console.log(a);
 
