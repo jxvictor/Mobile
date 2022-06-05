@@ -27,7 +27,7 @@ export class GameService {
   }
 
   updateGame(id: string, g: Game) {
-    const listGames = this.db.object('/game' + id);
+    const listGames = this.db.object('/game/' + id);
     return listGames.update({
       nome: g.nome,
       foto: g.foto,
@@ -39,7 +39,7 @@ export class GameService {
   }
 
   deleteGame(id: string) {
-    const listGames = this.db.object('/game' + id);
+    const listGames = this.db.object('/game/' + id);
     listGames.remove();
   }
 
@@ -48,6 +48,6 @@ export class GameService {
   }
 
   getGameById(id: string) {
-    return this.db.object('/game' + id);
+    return this.db.object('/game/' + id);
   }
 }

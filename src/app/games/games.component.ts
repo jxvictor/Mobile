@@ -71,7 +71,7 @@ export class GamesComponent implements OnInit {
     return id;
   }
 
-  async alertaConfirmacao(id: number) {
+  async alertaConfirmacao(id: string) {
     const alert = await this.alertController.create({
       header: 'Alerta',
       message: 'Deseja realmente excluir este Jogo?',
@@ -82,7 +82,7 @@ export class GamesComponent implements OnInit {
       {
         text: 'Sim',
         handler: () => {
-          this.excluirGame(id.toString());
+          this.excluirGame(id);
         }
       }
       ]
@@ -103,7 +103,7 @@ export class GamesComponent implements OnInit {
   salvar() {
     this.jogo = this.form.getRawValue();
 
-    if (this.jogo?.id) {
+    if (this.jogo?.$key) {
       this.gameService.updateGame(this.jogo.$key, this.jogo).then(() => {
         this.listarJogos();
       })

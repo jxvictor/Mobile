@@ -26,7 +26,7 @@ export class UsuarioService {
   }
 
   updateUsuario(id: string, u: Usuario) {
-    const listUsuarios = this.db.object('/usuario' + id);
+    const listUsuarios = this.db.object('/usuario/' + id);
     return listUsuarios.update({
       nome: u.nome,
       cpf: u.cpf,
@@ -39,7 +39,7 @@ export class UsuarioService {
   }
 
   deleteUsuario(id: string) {
-    const listUsuarios = this.db.object('/usuario' + id);
+    const listUsuarios = this.db.object('/usuario/' + id);
     listUsuarios.remove();
   }
 
@@ -49,10 +49,7 @@ export class UsuarioService {
 
   getUsuarioById(id: string) {
     console.log(id);
-<<<<<<< HEAD
-=======
     
->>>>>>> 2854657d8524e2bbc8c4f844547243bba60145c6
-    return this.db.object('/usuario' + id);
+    return this.db.object('/usuario/' + id);
   }
 }
